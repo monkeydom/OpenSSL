@@ -35,7 +35,7 @@ configure() {
     PLATFORM=$3
     SDK_VERSION=$4
     DEPLOYMENT_VERSION=$5
-    
+
     export CROSS_TOP="${PLATFORM}/Developer"
     export CROSS_SDK="${OS}${SDK_VERSION}.sdk"
     if [ "$ARCH" == "x86_64" ]; then
@@ -58,7 +58,7 @@ build()
    export CC="${BUILD_TOOLS}/usr/bin/gcc -fembed-bitcode -arch ${ARCH}"
 
    mkdir -p "lib-${TYPE}"
-   
+
    rm -rf openssl-${OPENSSL_VERSION}
    tar xfz openssl-${OPENSSL_VERSION}.tar.gz
    pushd .
@@ -75,7 +75,7 @@ build()
       else
          configure "iPhoneOS" $ARCH ${IPHONEOS_PLATFORM} ${IPHONEOS_SDK_VERSION} ${IPHONEOS_DEPLOYMENT_VERSION}
       fi
-   elif [ "$TYPE" == "macos" ]; then    
+   elif [ "$TYPE" == "macos" ]; then
       #OSX
       if [ "$ARCH" == "x86_64" ]; then
          ./Configure darwin64-x86_64-cc --openssldir="/tmp/openssl-${OPENSSL_VERSION}-${ARCH}" &> "/tmp/openssl-${OPENSSL_VERSION}-${ARCH}.log"
@@ -86,7 +86,7 @@ build()
       fi
    fi
 
-   make &> "/tmp/openssl-${OPENSSL_VERSION}-${ARCH}.log"
+   make -j8 &> "/tmp/openssl-${OPENSSL_VERSION}-${ARCH}.log"
    make install &> "/tmp/openssl-${OPENSSL_VERSION}-${ARCH}.log"
    popd
 
