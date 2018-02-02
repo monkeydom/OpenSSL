@@ -1,6 +1,6 @@
 *.DS_Store
 lib-ios/*.a
-lib-mac/*.a
+lib-macos/*.a
 include-ios
 include-macos
 Frameworks/*
