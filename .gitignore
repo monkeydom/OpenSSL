@@ -3,3 +3,5 @@ lib-ios/*.a
 lib-mac/*.a
 include-ios
 include-macos
+Frameworks/*
+openssl-*/
